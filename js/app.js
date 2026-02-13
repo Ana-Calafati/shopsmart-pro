@@ -59,7 +59,7 @@ function desconto(){
         <ul>
         <li>Valor: <span> ${v1} </span> </li>
         <li>Desconto: <span>${v2}</span> </li>       
-        <li>O valor com desconto é = <span> ${((v1 * v2)/100)}</span> </li>
+        <li>O valor com desconto é = <span> ${ v1- ((v1 * v2)/100)} </span> </li>
     </ul>
 
     `
