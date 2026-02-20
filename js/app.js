@@ -1,114 +1,183 @@
+const verificaV1 = document.getElementById('valor01');
+const verificaV2 = document.getElementById('valor02');
+const resultado = document.getElementById('resultado');
 
-// 1. ERRO: escopo global, capturando os elementos apenas uma vez para reutilizar
-const campoV1 = document.getElementById('valor01');
-const campoV2 = document.getElementById('valor02');
-const elementoResultado = document.getElementById('resultado');
 
-/**
- * 2. FUNÇÃO DE VALIDAÇÃO REUTILIZÁVEL
- * Verifica se os campos estão vazios ou se não são números válidos.
- */
-function validarDados() {
-    const v1 = campoV1.value;
-    const v2 = campoV2.value;
+function calcularTotal(){
 
-    if (v1 === '' || v2 === '' || isNaN(parseFloat(v1)) || isNaN(parseFloat(v2))) {
-        alert("Erro: Por favor, digite números válidos em ambos os campos.");
-        return false;
-    }
-    return true;
-}
+    const v1 = parseFloat(verificaV1.value);
+    const v2 = parseFloat(verificaV2.value);
 
-// --- FUNÇÕES DE OPERAÇÃO ---
+    // Comparação do tipo e valor (===) | (==) Compara apenas valor
+    if (isNaN(v1) || isNaN(v2)) {
 
-function calcularTotal() {
-    if (!validarDados()) return;
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
 
-    let v1 = parseFloat(campoV1.value);
-    let v2 = parseFloat(campoV2.value);
-    let total = v1 * v2;
-
-    elementoResultado.style.display = 'flex';
-    elementoResultado.innerHTML = `
+        `
         <ul>
-            <li>Preço: <span>R$ ${v1.toFixed(2)}</span></li>
-            <li>Quantidade: <span>${v2}</span></li>       
-            <li>O valor total é ${v1.toFixed(2)} * ${v2} = <span>R$ ${total.toFixed(2)}</span></li>
-        </ul>`;
-}
+        <li>ERRO DE VALIDAÇÃO</li>
+    </ul>
 
-function desconto() {
-    if (!validarDados()) return;
+    `
 
-    let v1 = parseFloat(campoV1.value);
-    let v2 = parseFloat(campoV2.value); // Aqui v2 representa a porcentagem
-    let valorDesconto = (v1 * v2) / 100;
-    let resultadoFinal = v1 - valorDesconto;
+    } else {
+       
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
 
-    elementoResultado.style.display = 'flex';
-    elementoResultado.innerHTML = `
+        `
         <ul>
-            <li>Valor Inicial: <span>R$ ${v1.toFixed(2)}</span></li>
-            <li>Percentual de Desconto: <span>${v2}%</span></li>       
-            <li>O valor com desconto é: <span>R$ ${resultadoFinal.toFixed(2)}</span></li>
-        </ul>`;
+        <li>Preço: <span> ${v1} </span> </li>
+        <li>Quantidade: <span>${v2}</span> </li>       
+        <li>O valor total é R$ ${v1.toFixed(2)} * ${v2} = <span>R$ ${(v1 * v2).toFixed(2)}</span> </li>
+    </ul>
+
+    `
+
+
+};
 }
 
-function juros() {
-    if (!validarDados()) return;
+function desconto(){
 
-    let v1 = parseFloat(campoV1.value);
-    let v2 = parseFloat(campoV2.value);
-    let valorJuros = (v1 * v2) / 100;
-    let resultadoFinal = v1 + valorJuros;
+    const verificaV1 = document.getElementById('valor01').value;
+    console.log(verificaV1);
+    const verificaV2 = document.getElementById('valor02').value;
+    console.log(verificaV2);
+    
 
-    elementoResultado.style.display = 'flex';
-    elementoResultado.innerHTML = `
+    if (verificaV1 === '' || verificaV2 === '') {
+
+        alert("O valor 01 ou o valor 02 está em branco, digite um numero.");
+
+    } else {
+
+        let v1 = parseFloat(document.getElementById('valor01').value);
+        let v2 = parseFloat(document.getElementById('valor02').value);
+        document.getElementById('resultado').style.display ='flex';
+        document.getElementById('resultado').style.display = 'flex';
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
+
+        `
         <ul>
-            <li>Valor Inicial: <span>R$ ${v1.toFixed(2)}</span></li>
-            <li>Percentual de Juros: <span>${v2}%</span></li>       
-            <li>O valor final com juros é: <span>R$ ${resultadoFinal.toFixed(2)}</span></li>
-        </ul>`;
+        <li>Valor: <span>R$ ${v1.toFixed(2)} </span> </li>
+        <li>Desconto: <span>${v2}%</span> </li>       
+        <li>O valor com desconto é = <span> ${( v1- ((v1 * v2)/100)).toFixed(2)} </span> </li>
+    </ul>
+
+    `
+
+
+};
 }
 
-function comissao() {
-    if (!validarDados()) return;
+function juros(){
 
-    let v1 = parseFloat(campoV1.value);
-    let v2 = parseFloat(campoV2.value);
-    let valorComissao = (v1 * v2) / 100;
+    const verificaV1 = document.getElementById('valor01').value;
+    console.log(verificaV1);
+    const verificaV2 = document.getElementById('valor02').value;
+    console.log(verificaV2);
+    
 
-    elementoResultado.style.display = 'flex';
-    elementoResultado.innerHTML = `
+    if (verificaV1 === '' || verificaV2 === '') {
+
+        alert("O valor 01 ou o valor 02 está em branco, digite um numero.");
+
+    } else {
+
+        let v1 = parseFloat(document.getElementById('valor01').value);
+        let v2 = parseFloat(document.getElementById('valor02').value);
+        document.getElementById('resultado').style.display ='flex';
+        document.getElementById('resultado').style.display = 'flex';
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
+
+        `
         <ul>
-            <li>Valor da Venda: <span>R$ ${v1.toFixed(2)}</span></li>
-            <li>Percentual de Comissão: <span>${v2}%</span></li>       
-            <li>O valor da comissão é: <span>R$ ${valorComissao.toFixed(2)}</span></li>
-        </ul>`;
+        <li>Valor: <span> ${v1} </span> </li>
+        <li>Desconto: <span>${v2}</span> </li>       
+        <li>O valor com juros é = <span>${ v1 + ((v1 * v2)/100)}</span> </li>
+    </ul>
+
+    `
+
+
+};
 }
 
-function lucro() {
-    if (!validarDados()) return;
+function comissao(){
 
-    let v1 = parseFloat(campoV1.value);
-    let v2 = parseFloat(campoV2.value);
-    let valorLucro = v1 - v2;
+    const verificaV1 = document.getElementById('valor01').value;
+    console.log(verificaV1);
+    const verificaV2 = document.getElementById('valor02').value;
+    console.log(verificaV2);
+    
 
-    elementoResultado.style.display = 'flex';
-    elementoResultado.innerHTML = `
+    if (verificaV1 === '' || verificaV2 === '') {
+
+        alert("O valor 01 ou o valor 02 está em branco, digite um numero.");
+
+    } else {
+
+        let v1 = parseFloat(document.getElementById('valor01').value);
+        let v2 = parseFloat(document.getElementById('valor02').value);
+        document.getElementById('resultado').style.display ='flex';
+        document.getElementById('resultado').style.display = 'flex';
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
+
+        `
         <ul>
-            <li>Preço de Venda: <span>R$ ${v1.toFixed(2)}</span></li>
-            <li>Custo: <span>R$ ${v2.toFixed(2)}</span></li>       
-            <li>O lucro líquido é de: <span>R$ ${valorLucro.toFixed(2)}</span></li>
-        </ul>`;
+        <li>Valor: <span> ${v1} </span> </li>
+        <li>Comissão: <span>${v2}</span> </li>       
+        <li> A comissão é = <span>${((v1 * v2)/100)}</span> </li>
+    </ul>
+
+    `
+
+
+};
 }
 
-/**
- * 7. FUNÇÃO LIMPAR CORRIGIDA
- */
+function lucro(){
+
+    const verificaV1 = document.getElementById('valor01').value;
+    console.log(verificaV1);
+    const verificaV2 = document.getElementById('valor02').value;
+    console.log(verificaV2);
+    
+
+    if (verificaV1 === '' || verificaV2 === '') {
+
+        alert("O valor 01 ou o valor 02 está em branco, digite um numero.");
+
+    } else {
+
+        let v1 = parseFloat(document.getElementById('valor01').value);
+        let v2 = parseFloat(document.getElementById('valor02').value);
+        document.getElementById('resultado').style.display ='flex';
+        document.getElementById('resultado').style.display = 'flex';
+        const resultado = document.getElementById('resultado');
+        resultado.innerHTML =
+
+        `
+        <ul>
+        <li>Preço da venda: <span> ${v1} </span> </li>
+        <li>Custo: <span>${v2}</span> </li>       
+        <li> O lucro é de = <span>${v1 - v2}</span> </li>
+    </ul>
+
+    `
+
+
+};
+}
+
 function limpar() {
-    elementoResultado.style.display = 'none';
-    campoV1.value = '';
-    campoV2.value = '';
-    campoV1.focus();
+    resultado.style.display = 'none';
+    verificaV1.value = '';
+    verificaV2.value = '';
+    verificaV1.focus();
 }
